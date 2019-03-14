@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class GameController {
 
-    private Entity[][] entities;
+    private Entity[][] entities = new Entity[14][40];
     private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
     private Zoe zoe;
 
@@ -23,7 +23,7 @@ public class GameController {
     }
 
     public void render() {
-
+        RenderEngine.render(entities, monstres, zoe);
     }
 
     public void nextLevel() {
@@ -44,18 +44,20 @@ public class GameController {
         for (int i = 0; i < objets.length; i++) {
             String[] s = objets[i].split(":");
             switch (s[0]) {
-                case "coffre":
-                    entities[Integer.parseInt(s[2])][Integer.parseInt(s[3])] = new Coffre(s[1]);
+                case "tresor":
+                    entities[Integer.parseInt(s[3])][Integer.parseInt(s[2])] = new Coffre(s[1]);
                     break;
                 case "monstre":
                     monstres.add(new Monstre(
                             s[1],
-                            Integer.parseInt(s[2]),
-                            Integer.parseInt(s[3]))
+                            Integer.parseInt(s[3]),
+                            Integer.parseInt(s[2]))
                     );
                     break;
                 case "sortie":
-                    entities[Integer.parseInt(s[1])][Integer.parseInt(s[2])] = new Sortie();
+                    System.out.println(s[2]);
+                    System.out.println(s[1]);
+                    entities[Integer.parseInt(s[2])][Integer.parseInt(s[1])] = new Sortie();
                     break;
                 case "zoe":
                     zoe = new Zoe(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
