@@ -1,6 +1,8 @@
 import GameObjects.Entity.Entity;
 import GameObjects.Personnage.*;
+import Level.Paire;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -16,17 +18,35 @@ public abstract class RenderEngine {
      */
     public static void render(Entity[][] game, LinkedList<Monstre> monstres, Zoe zoe) {
 
-        for (int i = 0; i < game.length; i++) {
-            String s = new String();
-            for (Entity entity : game[i]) {
-                if (entity == null) {
-                    s += " ";
+        char[][] level = new char[14][40];
+
+        for (int i = 0; i < 14; i++) {
+            for (int j = 0; j < 40; j++) {
+                if (game[i][j] != null) {
+                    level[i][j] = game[i][j].getAppearance();
                 } else {
-                    s += entity.getAppearance();
+                    level[i][j] = ' ';
                 }
             }
-            System.out.println(s);
         }
+
+        for (Monstre monstre : monstres) {
+            level[monstre.getPosX()][monstre.getPosY()] = monstre.getAppearance();
+        }
+
+        if (zoe != null) {
+            level[zoe.getPosX()][zoe.getPosY()] = zoe.getAppearance();
+        }
+
+        String s = new String();
+        for (char[] c : level) {
+            for (char c1 : c) {
+                s += c1;
+            }
+            System.out.println(s);
+            s = "";
+        }
+
     }
 
 }

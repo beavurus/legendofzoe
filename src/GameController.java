@@ -55,12 +55,10 @@ public class GameController {
                     );
                     break;
                 case "sortie":
-                    System.out.println(s[2]);
-                    System.out.println(s[1]);
                     entities[Integer.parseInt(s[2])][Integer.parseInt(s[1])] = new Sortie();
                     break;
                 case "zoe":
-                    zoe = new Zoe(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+                    this.zoe = new Zoe(Integer.parseInt(s[2]), Integer.parseInt(s[1]));
                     break;
                 default:
                     break;
