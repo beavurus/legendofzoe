@@ -1,7 +1,5 @@
-package GameObjects.Personnage;
+package Personnage;
 
 public class Zoe extends Personnage {
 
-    public Zoe(int x, int y) {
-    }
-}
+};
