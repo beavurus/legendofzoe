@@ -8,7 +8,6 @@ public class GameController {
 
     private Entity[][] entities = new Entity[14][40];
     private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
-    private Zoe zoe;
 
     public GameController() {
 
@@ -20,6 +19,29 @@ public class GameController {
 
     public void tourZoe(char c) {
 
+    	switch (c) {
+
+    		case w : zoe.deplacer(0, 1);
+    		case a : zoe.deplacer(-1, 0);
+    		case s : zoe.deplacer(0, -1);
+    		case d : zoe.deplacer(1, 0);
+    		case c : creuser(zoe.getPosX(), zoe.getPosY());
+    		case x : zoe.deplacer(-1, 0);
+    		case o : zoe.deplacer(0, -1);
+    		case q : zoe.deplacer(1, 0);
+    	}
+
+    }
+
+    public void creuser(int x, int y) {
+
+        for (int i = x-1; i <= x+1; i++) {
+            for (int j = y-1; j <= y+1; j++) {
+                if (entities[i][j] instanceof Mur) {
+                    entities[i][j] = null;
+                }
+            }
+        }
     }
 
     public void render() {
@@ -60,7 +82,7 @@ public class GameController {
                     entities[Integer.parseInt(s[2])][Integer.parseInt(s[1])] = new Sortie();
                     break;
                 case "zoe":
-                    zoe = new Zoe(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
+                    Zoe zoe = new Zoe(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
                     break;
                 default:
                     break;
@@ -69,6 +91,6 @@ public class GameController {
 
     }
 
-    //TODO methode qui verifie si le jeu est ermine (a chaque tour)
+    //TODO methode qui verifie si le jeu est termine (a chaque tour)
 
 }
