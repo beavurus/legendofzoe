@@ -2,10 +2,7 @@ package GameObjects.Entity;
 
 public class Sortie extends Entity {
 
-    private char appearance = 'E';
-
-    @Override
-    public char getAppearance() {
-        return appearance;
+    public Sortie(int posX, int posY, char appearance) {
+        super(posX, posY, appearance);
     }
 }

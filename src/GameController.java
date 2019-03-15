@@ -21,19 +21,25 @@ public class GameController {
     public void tourZoe(char c) {
 
     	switch (c) {
-
-    		case w : zoe.deplacer(0, 1);
+    		case 'w' :
+    		    zoe.deplacer(0, 1);
     			break;
-    		case a : zoe.deplacer(-1, 0);
+    		case 'a' :
+    		    zoe.deplacer(-1, 0);
     			break;
-    		case s : zoe.deplacer(0, -1);
+    		case 's' :
+    		    zoe.deplacer(0, -1);
     			break;
-    		case d : zoe.deplacer(1, 0);
+    		case 'd' :
+    		    zoe.deplacer(1, 0);
     			break;
-    		case c : creuser(zoe.getPosX(), zoe.getPosY());
-    			break:
-    		case x : zoe.deplacer(-1, 0);
-    		case o : 
+    		case 'c' :
+    		    creuser(zoe.getPosX(), zoe.getPosY());
+    			break;
+    		case 'x' :
+    		    zoe.deplacer(-1, 0);
+    		    break;
+    		case 'o' :
 		        for (int i = zoe.getPosX()-1; i <= zoe.getPosX()+1; i++) {
 		            for (int j = zoe.getPosY()-1; j <= zoe.getPosY()+1; j++) {
 
@@ -42,10 +48,13 @@ public class GameController {
 		                }
 		            }
 		        }
-
-    		case q : System.exit(0);
+		        break;
+    		case 'q' :
+    		    System.exit(0);
+    		    break;
+    		default:
+    		    break;
     	}
-
     }
 
     public void creuser(int x, int y) {
@@ -71,7 +80,7 @@ public class GameController {
         for (int i = 0; i < murs.length; i++) {
             for (int j = 0; j < murs[0].length; j++) {
                 if (murs[i][j]) {
-                    entities[i][j] = new Mur();
+                    entities[i][j] = new Mur(j,i,'#');
                 } else {
                     entities[i][j] = null;
                 }
@@ -82,20 +91,26 @@ public class GameController {
             String[] s = objets[i].split(":");
             switch (s[0]) {
                 case "tresor":
-                    entities[Integer.parseInt(s[3])][Integer.parseInt(s[2])] = new Coffre(s[1]);
+                    int posX = Integer.parseInt(s[2]);
+                    int posY = Integer.parseInt(s[3]);
+                    entities[posY][posX] = new Coffre(posX, posY, '$', s[1]);
                     break;
                 case "monstre":
                     monstres.add(new Monstre(
                             s[1],
-                            Integer.parseInt(s[3]),
-                            Integer.parseInt(s[2]))
+                            Integer.parseInt(s[2]),
+                            Integer.parseInt(s[3]))
                     );
                     break;
                 case "sortie":
-                    entities[Integer.parseInt(s[2])][Integer.parseInt(s[1])] = new Sortie();
+                    posX = Integer.parseInt(s[1]);
+                    posY = Integer.parseInt(s[2]);
+                    entities[posY][posX] = new Sortie(posX, posY, 'E');
                     break;
                 case "zoe":
-                    this.zoe = new Zoe(Integer.parseInt(s[2]), Integer.parseInt(s[1]));
+                    posX = Integer.parseInt(s[1]);
+                    posY = Integer.parseInt(s[2]);
+                    this.zoe = new Zoe(posX, posY);
                     break;
                 default:
                     break;

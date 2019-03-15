@@ -3,14 +3,9 @@ package GameObjects.Entity;
 public class Coffre extends Entity {
 
     private String item;
-    private char appearance = '$';
 
-    @Override
-    public char getAppearance() {
-        return appearance;
-    }
-
-    public Coffre(String item) {
+    public Coffre(int posX, int posY, char appearance, String item) {
+        super(posX, posY, appearance);
         this.item = item;
     }
 
