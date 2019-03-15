@@ -8,6 +8,7 @@ public class GameController {
 
     private Entity[][] entities = new Entity[14][40];
     private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
+    private Zoe zoe;
 
     public GameController() {
 
@@ -21,14 +22,14 @@ public class GameController {
 
     	switch (c) {
 
-    		case w : zoe.deplacer(0, 1);
-    		case a : zoe.deplacer(-1, 0);
-    		case s : zoe.deplacer(0, -1);
-    		case d : zoe.deplacer(1, 0);
-    		case c : creuser(zoe.getPosX(), zoe.getPosY());
-    		case x : zoe.deplacer(-1, 0);
-    		case o : zoe.deplacer(0, -1);
-    		case q : zoe.deplacer(1, 0);
+    		case 'w' : zoe.deplacer(0, 1);
+    		case 'a' : zoe.deplacer(-1, 0);
+    		case 's' : zoe.deplacer(0, -1);
+    		case 'd' : zoe.deplacer(1, 0);
+    		case 'c' : creuser(zoe.getPosX(), zoe.getPosY());
+    		case 'x' : zoe.deplacer(-1, 0);
+    		case 'o' : zoe.deplacer(0, -1);
+    		case 'q' : zoe.deplacer(1, 0);
     	}
 
     }
@@ -80,11 +81,7 @@ public class GameController {
                     entities[Integer.parseInt(s[2])][Integer.parseInt(s[1])] = new Sortie();
                     break;
                 case "zoe":
-<<<<<<< HEAD
                     this.zoe = new Zoe(Integer.parseInt(s[2]), Integer.parseInt(s[1]));
-=======
-                    Zoe zoe = new Zoe(Integer.parseInt(s[1]), Integer.parseInt(s[2]));
->>>>>>> 6042cd6f9b3419b482319288cf4cc64ee2536f2b
                     break;
                 default:
                     break;

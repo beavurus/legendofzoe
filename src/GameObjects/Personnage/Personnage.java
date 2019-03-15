@@ -1,4 +1,4 @@
-package Personnage;
+package GameObjects.Personnage;
 
 public abstract class Personnage {
 
@@ -7,21 +7,21 @@ public abstract class Personnage {
     private int posX;
     private int posY;
     private final int MIN_VIE = 0;
-    private char disp;
+    private char appearance;
 
 
-    public Personnage(int pdv, int dmg, char disp) {
+    public Personnage(int pdv, int dmg, char appearance) {
         this.pdv = pdv;
         this.dmg = dmg;
-        this.disp = disp;
+        this.appearance = appearance;
     }
 
     public int getPDV() {
-        return pointsDeVie;
+        return pdv;
     }
 
     public int getDmg() {
-        return degats;
+        return dmg;
     }
     
     public int getPosX() {
@@ -32,8 +32,8 @@ public abstract class Personnage {
         return posY;
     }
 
-    public char getDisp() {
-        return apparence;
+    public char getAppearance() {
+        return appearance;
     }
 
     public void deplacer(int x, int y) {
@@ -43,7 +43,7 @@ public abstract class Personnage {
 
     public void modVie(int mod) {
 
-        this.pointsDeVie += mod;
+        this.pdv += mod;
     }
 
     public void attaquer(Personnage personnage) {
