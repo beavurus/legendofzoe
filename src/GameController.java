@@ -22,14 +22,28 @@ public class GameController {
 
     	switch (c) {
 
-    		case 'w' : zoe.deplacer(0, 1);
-    		case 'a' : zoe.deplacer(-1, 0);
-    		case 's' : zoe.deplacer(0, -1);
-    		case 'd' : zoe.deplacer(1, 0);
-    		case 'c' : creuser(zoe.getPosX(), zoe.getPosY());
-    		case 'x' : zoe.deplacer(-1, 0);
-    		case 'o' : zoe.deplacer(0, -1);
-    		case 'q' : zoe.deplacer(1, 0);
+    		case w : zoe.deplacer(0, 1);
+    			break;
+    		case a : zoe.deplacer(-1, 0);
+    			break;
+    		case s : zoe.deplacer(0, -1);
+    			break;
+    		case d : zoe.deplacer(1, 0);
+    			break;
+    		case c : creuser(zoe.getPosX(), zoe.getPosY());
+    			break:
+    		case x : zoe.deplacer(-1, 0);
+    		case o : 
+		        for (int i = zoe.getPosX()-1; i <= zoe.getPosX()+1; i++) {
+		            for (int j = zoe.getPosY()-1; j <= zoe.getPosY()+1; j++) {
+
+		                if (entities[i][j] instanceof Mur) {
+		                    entities[i][j] = null;
+		                }
+		            }
+		        }
+
+    		case q : System.exit(0);
     	}
 
     }
