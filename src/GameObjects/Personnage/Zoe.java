@@ -1,7 +1,8 @@
-package GameObjects.Personnage;
+package Personnage;
 
 public class Zoe extends Personnage {
 
+<<<<<<< HEAD
     private int posX;
     private int posY;
     private char appearance = '&';
@@ -26,3 +27,6 @@ public class Zoe extends Personnage {
         return posY;
     }
 }
+=======
+};
+>>>>>>> 6042cd6f9b3419b482319288cf4cc64ee2536f2b
