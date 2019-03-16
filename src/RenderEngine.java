@@ -30,7 +30,6 @@ public abstract class RenderEngine {
 
         for (Monstre monstre : monstres) {
             level[monstre.getPosY()][monstre.getPosX()] = monstre.getAppearance();
-            System.out.println(monstre.getAppearance() + " " + monstre.getPosX() + " " + monstre.getPosY());
         }
 
         if (zoe != null) {

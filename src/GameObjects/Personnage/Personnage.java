@@ -1,5 +1,6 @@
 package GameObjects.Personnage;
 
+import GameObjects.Entity.Entity;
 import GameObjects.GameObject;
 
 public abstract class Personnage extends GameObject {
