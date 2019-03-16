@@ -125,6 +125,8 @@ public class GameController {
             }
         }
 
+        Personnage.setLayout(entities);
+
     }
 
     //TODO methode qui verifie si le jeu est termine (a chaque tour)
