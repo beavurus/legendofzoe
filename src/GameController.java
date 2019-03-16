@@ -25,19 +25,26 @@ public class GameController {
 
     public void tourZoe(char c) {
 
-        // TODO ajoutter methode pour verifier si le deplacement garde zoe dans le niveau
     	switch (c) {
     		case 'w' :
-    		    zoe.deplacer(0, -1);
+    		    if (GameControllerHelper.isContained(zoe.getPosX(), zoe.getPosY()-1, entities)) {
+                    zoe.deplacer(0, -1);
+                }
     			break;
     		case 'a' :
-    		    zoe.deplacer(-1, 0);
+                if (GameControllerHelper.isContained(zoe.getPosX() - 1, zoe.getPosY(), entities)) {
+                    zoe.deplacer(-1, 0);
+                }
     			break;
     		case 's' :
-    		    zoe.deplacer(0, 1);
+                if (GameControllerHelper.isContained(zoe.getPosX(), zoe.getPosY()+1, entities)) {
+                    zoe.deplacer(0, 1);
+                }
     			break;
     		case 'd' :
-    		    zoe.deplacer(1, 0);
+                if (GameControllerHelper.isContained(zoe.getPosX()+1, zoe.getPosY(), entities)) {
+                    zoe.deplacer(1, 0);
+                }
     			break;
     		case 'c' :
     		    creuser(zoe);
@@ -46,14 +53,7 @@ public class GameController {
     		    zoe.deplacer(-1, 0);
     		    break;
     		case 'o' :
-		        for (int i = zoe.getPosX()-1; i <= zoe.getPosX()+1; i++) {
-		            for (int j = zoe.getPosY()-1; j <= zoe.getPosY()+1; j++) {
-
-		                if (entities[i][j] instanceof Mur) {
-		                    entities[i][j] = null;
-		                }
-		            }
-		        }
+                //open(zoe);
 		        break;
     		case 'q' :
     		    System.exit(0);
