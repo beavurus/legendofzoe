@@ -14,6 +14,9 @@ public class LegendOfZoe {
         GameController gameController = new GameController();
         gameController.nextLevel();
         gameController.render();
+        Scanner s = new Scanner(System.in);
+        gameController.tourZoe(s.nextLine().charAt(0));
+        gameController.render();
 
 //        Messages.afficherIntro();
 //

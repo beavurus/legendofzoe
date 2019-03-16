@@ -16,10 +16,15 @@ public class GameController {
 
     public void tourMonstres() {
 
+        for (Monstre monstre : monstres) {
+            monstre.deplacer(zoe);
+        }
+
     }
 
     public void tourZoe(char c) {
 
+        // TODO ajoutter methode pour verifier si le deplacement garde zoe dans le niveau
     	switch (c) {
     		case 'w' :
     		    zoe.deplacer(0, 1);

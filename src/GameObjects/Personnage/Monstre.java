@@ -9,5 +9,14 @@ public class Monstre extends Personnage {
         this.item = item;
     }
 
+    public void deplacer(Zoe zoe) {
+
+        int posXZoe = zoe.getPosX();
+        int posYZoe = zoe.getPosY();
+
+
+
+    }
+
 }
 
