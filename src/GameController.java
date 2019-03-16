@@ -1,7 +1,6 @@
-import GameObjects.Entity.Entity;
-import Level.*;
 import GameObjects.Personnage.*;
 import GameObjects.Entity.*;
+import Level.*;
 import java.util.LinkedList;
 
 public class GameController {
@@ -80,21 +79,15 @@ public class GameController {
     }
 
     public void nextLevel() {
+
         //TODO changer numNiveau
         Level level = new Level(1);
         boolean[][] murs = level.getMurs();
         String[] objets = level.getObjects();
 
-        for (int i = 0; i < murs.length; i++) {
-            for (int j = 0; j < murs[0].length; j++) {
-                if (murs[i][j]) {
-                    entities[i][j] = new Mur(j,i,'#');
-                } else {
-                    entities[i][j] = null;
-                }
-            }
-        }
+        entities = GameControllerHelper.readWalls(murs);
 
+        // TODO move some code to GameControllerHelper to ligthen class.
         for (int i = 0; i < objets.length; i++) {
             String[] s = objets[i].split(":");
             switch (s[0]) {
@@ -104,11 +97,9 @@ public class GameController {
                     entities[posY][posX] = new Coffre(posX, posY, '$', s[1]);
                     break;
                 case "monstre":
-                    monstres.add(new Monstre(
-                            s[1],
-                            Integer.parseInt(s[2]),
-                            Integer.parseInt(s[3]))
-                    );
+                    posX = Integer.parseInt(s[2]);
+                    posY = Integer.parseInt(s[3]);
+                    monstres.add(new Monstre(s[1], posX, posY));
                     break;
                 case "sortie":
                     posX = Integer.parseInt(s[1]);

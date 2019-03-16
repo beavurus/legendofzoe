@@ -1,5 +1,7 @@
 package Level;
 
+import java.util.Arrays;
+
 public class Level {
 
     private Paire<boolean[][], String[]> niveau;
@@ -15,7 +17,17 @@ public class Level {
     }
 
     public boolean[][] getMurs() {
-        return murs;
+
+        boolean[][] resulat = new boolean[14][40];
+
+        for (int y = 0; y < murs.length; y++) {
+            for (int x = 0; x < murs[0].length; x++) {
+                resulat[y][x] = murs[y][x];
+            }
+        }
+        assert Arrays.deepEquals(resulat, murs) : "Erreur de copie de tableau.";
+
+        return resulat;
     }
 
     public String[] getObjects() {
