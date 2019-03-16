@@ -22,7 +22,11 @@ public abstract class GameControllerHelper {
 
     public static boolean collides(int x, int y, Entity[][] layout) {
 
-        if (layout[y][x] instanceof Mur) {
+        try {
+            if (layout[y][x] != null) {
+                return true;
+            }
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             return true;
         }
 

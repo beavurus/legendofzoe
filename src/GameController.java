@@ -1,6 +1,8 @@
 import GameObjects.Personnage.*;
 import GameObjects.Entity.*;
 import Level.*;
+
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class GameController {
@@ -8,6 +10,7 @@ public class GameController {
     private Entity[][] entities = new Entity[14][40];
     private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
     private Zoe zoe;
+    private Level currentLevel;
 
     public GameController() {
 
@@ -19,29 +22,25 @@ public class GameController {
         }
     }
 
-    private static boolean movementConditions(int x, int y, Entity[][] layout) {
-        return GameControllerHelper.isContained(x,y,layout) && !GameControllerHelper.collides(x,y,layout);
-    }
-
     public void tourZoe(char c) {
     	switch (c) {
     		case 'w' :
-    		    if (movementConditions(zoe.getPosX(), zoe.getPosY()-1, entities)) {
+    		    if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()-1, entities)) {
                     zoe.deplacer(0, -1);
                 }
     			break;
     		case 'a' :
-                if (movementConditions(zoe.getPosX()-1, zoe.getPosY(), entities)) {
+                if (!GameControllerHelper.collides(zoe.getPosX()-1, zoe.getPosY(), entities)) {
                     zoe.deplacer(-1, 0);
                 }
     			break;
     		case 's' :
-                if (movementConditions(zoe.getPosX(), zoe.getPosY(), entities)) {
+                if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()+1, entities)) {
                     zoe.deplacer(0, 1);
                 }
     			break;
     		case 'd' :
-                if (movementConditions(zoe.getPosX()+1, zoe.getPosY(), entities)) {
+                if (!GameControllerHelper.collides(zoe.getPosX()+1, zoe.getPosY(), entities)) {
                     zoe.deplacer(1, 0);
                 }
     			break;
@@ -86,9 +85,10 @@ public class GameController {
     public void nextLevel() {
 
         //TODO changer numNiveau
-        Level level = new Level(1);
-        boolean[][] murs = level.getMurs();
-        String[] objets = level.getObjects();
+        int numNiveau = 1;
+        currentLevel = new Level(numNiveau);
+        boolean[][] murs = currentLevel.getMurs();
+        String[] objets = currentLevel.getObjects();
 
         entities = GameControllerHelper.readWalls(murs);
 
