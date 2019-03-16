@@ -20,4 +20,17 @@ public abstract class GameControllerHelper {
 
     }
 
+    public static boolean isContained(int x, int y, Entity[][] layout) {
+
+        int hauteur = layout.length;
+        int largeur = layout[0].length;
+
+        if ( x < 0 || x > largeur || y < 0 || y > hauteur ) {
+            return false;
+        }
+
+        return true;
+
+    }
+
 }

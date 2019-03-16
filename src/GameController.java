@@ -40,7 +40,7 @@ public class GameController {
     		    zoe.deplacer(1, 0);
     			break;
     		case 'c' :
-    		    creuser(zoe.getPosX(), zoe.getPosY());
+    		    creuser(zoe);
     			break;
     		case 'x' :
     		    zoe.deplacer(-1, 0);
@@ -63,15 +63,21 @@ public class GameController {
     	}
     }
 
-    public void creuser(int x, int y) {
+    private void creuser(Zoe zoe) {
 
-        for (int i = x-1; i <= x+1; i++) {
-            for (int j = y-1; j <= y+1; j++) {
-                if (entities[i][j] instanceof Mur) {
-                    entities[i][j] = null;
+        int posX = zoe.getPosX();
+        int posY = zoe.getPosY();
+
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                if (GameControllerHelper.isContained(posX + x, posY + y, entities)
+                        && entities[posY + y][posX + x] instanceof Mur) {
+                    entities[posY + y][posX + x] = null;
                 }
+
             }
         }
+
     }
 
     public void render() {
