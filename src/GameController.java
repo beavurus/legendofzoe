@@ -18,7 +18,7 @@ public class GameController {
 
     public void tourMonstres() {
         for (Monstre monstre : monstres) {
-            monstre.deplacer(zoe);
+            monstre.deplacer(zoe, currentLevel.getMurs());
         }
     }
 

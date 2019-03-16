@@ -26,8 +26,12 @@ public class LegendOfZoe {
         while (true) {
             String input = s.nextLine();
             char[] commandes = input.toCharArray();
-            for (char c : commandes) {
-                controller.tourZoe(c);
+            if (commandes.length != 0) {
+                for (char c : commandes) {
+                    controller.tourZoe(c);
+                    controller.tourMonstres();
+                }
+            } else {
                 controller.tourMonstres();
             }
             controller.render();

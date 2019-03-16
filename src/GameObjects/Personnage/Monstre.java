@@ -9,32 +9,48 @@ public class Monstre extends Personnage {
         this.item = item;
     }
 
-    public void deplacer(Zoe zoe) {
+    public void deplacer(Zoe zoe, boolean[][] murs) {
 
         switch (getDirection(zoe)) {
             case "N":
-                super.deplacer(0, -1);
+                if (!murs[this.getPosY()-1][this.getPosX()]) {
+                    super.deplacer(0, -1);
+                }
                 break;
             case "NE":
-                super.deplacer(1, -1);
+                if (!murs[this.getPosY()-1][this.getPosX()+1]) {
+                    super.deplacer(1, -1);
+                }
                 break;
             case "E":
-                super.deplacer(1,0);
+                if (!murs[this.getPosY()][this.getPosX()+1]) {
+                    super.deplacer(1, 0);
+                }
                 break;
             case "SE":
-                super.deplacer(1, 1);
+                if (!murs[this.getPosY()+1][this.getPosX()+1]) {
+                    super.deplacer(1, 1);
+                }
                 break;
             case "S":
-                super.deplacer(0,1);
+                if (!murs[this.getPosY()+1][this.getPosX()]) {
+                    super.deplacer(0, 1);
+                }
                 break;
             case "SW":
-                super.deplacer(-1, 1);
+                if (!murs[this.getPosY()+1][this.getPosX()]) {
+                    super.deplacer(-1, 1);
+                }
                 break;
             case "W":
-                super.deplacer(-1, 0);
+                if (!murs[this.getPosY()][this.getPosX()-1]) {
+                    super.deplacer(-1, 0);
+                }
                 break;
             case "NW":
-                super.deplacer(-1, -1);
+                if (!murs[this.getPosY()-1][this.getPosX()-1]) {
+                    super.deplacer(-1, -1);
+                }
                 break;
             default:
                 break;
