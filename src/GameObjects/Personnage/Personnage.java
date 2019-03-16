@@ -7,6 +7,17 @@ public abstract class Personnage extends GameObject {
 
     private int pdv;
     private int dmg;
+    private static Entity[][] layout;
+
+    /**
+     * Ici on garde la reference active, comme ca tout changement dans le layout
+     * au niveau du GameController sont en synchronisation avec la variable layout.
+     * (Utilisee pour verifier l'existence de murs, coffres, etc...)
+     * @param layout Layout du niveau (murs, coffres, sorties...)
+     */
+    public void setLayout(Entity[][] layout) {
+        this.layout = layout;
+    }
 
     public Personnage(int pdv, int dmg, char appearance, int posX, int posY) {
         super(posX, posY, appearance);
