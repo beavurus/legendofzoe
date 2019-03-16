@@ -13,36 +13,35 @@ public class GameController {
 
     }
 
-
-
     public void tourMonstres() {
-
         for (Monstre monstre : monstres) {
             monstre.deplacer(zoe);
         }
-
     }
 
     public void tourZoe(char c) {
-
     	switch (c) {
     		case 'w' :
-    		    if (GameControllerHelper.isContained(zoe.getPosX(), zoe.getPosY()-1, entities)) {
+    		    if (GameControllerHelper.isContained(zoe.getPosX(), zoe.getPosY()-1, entities)
+                        && !GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()-1, entities)) {
                     zoe.deplacer(0, -1);
                 }
     			break;
     		case 'a' :
-                if (GameControllerHelper.isContained(zoe.getPosX() - 1, zoe.getPosY(), entities)) {
+                if (GameControllerHelper.isContained(zoe.getPosX() - 1, zoe.getPosY(), entities)
+                        && !GameControllerHelper.collides(zoe.getPosX() - 1, zoe.getPosY(), entities)) {
                     zoe.deplacer(-1, 0);
                 }
     			break;
     		case 's' :
-                if (GameControllerHelper.isContained(zoe.getPosX(), zoe.getPosY()+1, entities)) {
+                if (GameControllerHelper.isContained(zoe.getPosX(), zoe.getPosY()+1, entities)
+                        && !GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()+1, entities)) {
                     zoe.deplacer(0, 1);
                 }
     			break;
     		case 'd' :
-                if (GameControllerHelper.isContained(zoe.getPosX()+1, zoe.getPosY(), entities)) {
+                if (GameControllerHelper.isContained(zoe.getPosX()+1, zoe.getPosY(), entities)
+                        && !GameControllerHelper.collides(zoe.getPosX()+1, zoe.getPosY(), entities)) {
                     zoe.deplacer(1, 0);
                 }
     			break;

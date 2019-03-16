@@ -20,6 +20,16 @@ public abstract class GameControllerHelper {
 
     }
 
+    public static boolean collides(int x, int y, Entity[][] layout) {
+
+        if (layout[y][x] instanceof Mur) {
+            return true;
+        }
+
+        return false;
+
+    }
+
     public static boolean isContained(int x, int y, Entity[][] layout) {
 
         int hauteur = layout.length;
