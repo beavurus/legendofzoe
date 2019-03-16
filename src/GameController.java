@@ -14,6 +14,8 @@ public class GameController {
 
     }
 
+
+
     public void tourMonstres() {
 
         for (Monstre monstre : monstres) {
@@ -27,13 +29,13 @@ public class GameController {
         // TODO ajoutter methode pour verifier si le deplacement garde zoe dans le niveau
     	switch (c) {
     		case 'w' :
-    		    zoe.deplacer(0, 1);
+    		    zoe.deplacer(0, -1);
     			break;
     		case 'a' :
     		    zoe.deplacer(-1, 0);
     			break;
     		case 's' :
-    		    zoe.deplacer(0, -1);
+    		    zoe.deplacer(0, 1);
     			break;
     		case 'd' :
     		    zoe.deplacer(1, 0);
@@ -78,7 +80,8 @@ public class GameController {
     }
 
     public void nextLevel() {
-        Level level = new Level(1); //TODO changer numNiveau
+        //TODO changer numNiveau
+        Level level = new Level(1);
         boolean[][] murs = level.getMurs();
         String[] objets = level.getObjects();
 
