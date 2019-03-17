@@ -11,6 +11,7 @@ public class GameController {
     private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
     private Zoe zoe;
     private Level currentLevel;
+    private int numNiveau = 1;
 
     public GameController() {
 
@@ -26,42 +27,46 @@ public class GameController {
 
     public void tourZoe(char c) {
 
-    	switch (c) {
-    		case 'w' :
-    		    if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()-1, entities)) {
-                    zoe.deplacer(0, -1);
-                }
-    			break;
-    		case 'a' :
-                if (!GameControllerHelper.collides(zoe.getPosX()-1, zoe.getPosY(), entities)) {
+        if (currentLevel.isHexaforceCollecte() && exit(zoe)) {
+            nextLevel();
+        } else {
+            switch (c) {
+                case 'w':
+                    if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY() - 1, entities)) {
+                        zoe.deplacer(0, -1);
+                    }
+                    break;
+                case 'a':
+                    if (!GameControllerHelper.collides(zoe.getPosX() - 1, zoe.getPosY(), entities)) {
+                        zoe.deplacer(-1, 0);
+                    }
+                    break;
+                case 's':
+                    if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY() + 1, entities)) {
+                        zoe.deplacer(0, 1);
+                    }
+                    break;
+                case 'd':
+                    if (!GameControllerHelper.collides(zoe.getPosX() + 1, zoe.getPosY(), entities)) {
+                        zoe.deplacer(1, 0);
+                    }
+                    break;
+                case 'c':
+                    creuser(zoe);
+                    break;
+                case 'x':
                     zoe.deplacer(-1, 0);
-                }
-    			break;
-    		case 's' :
-                if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()+1, entities)) {
-                    zoe.deplacer(0, 1);
-                }
-    			break;
-    		case 'd' :
-                if (!GameControllerHelper.collides(zoe.getPosX()+1, zoe.getPosY(), entities)) {
-                    zoe.deplacer(1, 0);
-                }
-    			break;
-    		case 'c' :
-    		    creuser(zoe);
-    			break;
-    		case 'x' :
-    		    zoe.deplacer(-1, 0);
-    		    break;
-    		case 'o' :
-                open(zoe);
-		        break;
-    		case 'q' :
-    		    System.exit(0);
-    		    break;
-    		default:
-    		    break;
-    	}
+                    break;
+                case 'o':
+                    open(zoe);
+                    break;
+                case 'q':
+                    System.exit(0);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void creuser(Zoe zoe) {
@@ -98,6 +103,7 @@ public class GameController {
 
                                 case "hexaforce":
                                     currentLevel.setHexaforceCollecte(true);
+                                    System.out.println("Hexaforce collecté!");
                                     break;
 
                                 case "potionvie":
@@ -121,15 +127,28 @@ public class GameController {
         }
     }
 
+    private boolean exit(Zoe zoe) {
+
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                if (entities[y + zoe.getPosY()][x + zoe.getPosX()] instanceof Sortie) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
     public void render() {
         RenderEngine.render(entities, monstres, zoe);
     }
 
     public void nextLevel() {
 
-        //TODO changer numNiveau
-        int numNiveau = 1;
         currentLevel = new Level(numNiveau);
+        numNiveau++;
         boolean[][] murs = currentLevel.getMurs();
         String[] objets = currentLevel.getObjects();
 
@@ -164,7 +183,5 @@ public class GameController {
         }
 
     }
-
-
 
 }
