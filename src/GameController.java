@@ -20,7 +20,18 @@ public class GameController {
     public void tourMonstres() {
 
         for (Monstre monstre : monstres) {
-            monstre.deplacer(zoe, entities);
+
+            int posX = monstre.getPosX();
+            int posY = monstre.getPosY();
+            int zoePosX = zoe.getPosX();
+            int zoePosY = zoe.getPosY();
+
+            if ((zoePosX-1 <= posX && posX <= zoePosX+1) && (zoePosY-1 <= posY && posY <= zoePosY+1)) {
+                monstre.attaquer(zoe);
+            } else {
+                monstre.deplacer(zoe, entities);
+            }
+
         }
 
     }
