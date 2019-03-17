@@ -31,4 +31,7 @@ public abstract class GameObject {
         return this.appearance;
     }
 
+    public void setAppearance(char appearance) {
+        this.appearance = appearance;
+    }
 }

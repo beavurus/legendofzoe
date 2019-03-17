@@ -54,7 +54,7 @@ public class GameController {
     		    zoe.deplacer(-1, 0);
     		    break;
     		case 'o' :
-                //open(zoe);
+                open(zoe);
 		        break;
     		case 'q' :
     		    System.exit(0);
@@ -79,6 +79,29 @@ public class GameController {
             }
         }
 
+    }
+
+    private void open(Zoe zoe) {
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                if (entities[y + zoe.getPosY()][x + zoe.getPosX()] instanceof Coffre) {
+                    Coffre tresor = (Coffre) entities[y + zoe.getPosY()][x + zoe.getPosX()];
+                    switch (tresor.getItem()) {
+                        case "hexaforce":
+                            currentLevel.setHexaforceCollecte(true);
+                            break;
+                        case "potionvie":
+                            zoe.modVie(100);
+                            break;
+                        case "coeur":
+                            zoe.modVie(1);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     public void render() {
@@ -125,6 +148,6 @@ public class GameController {
 
     }
 
-    //TODO methode qui verifie si le jeu est termine (a chaque tour)
+
 
 }
