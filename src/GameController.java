@@ -82,24 +82,41 @@ public class GameController {
     }
 
     private void open(Zoe zoe) {
+
         for (int y = -1; y <= 1; y++) {
             for (int x = -1; x <= 1; x++) {
-                if (entities[y + zoe.getPosY()][x + zoe.getPosX()] instanceof Coffre) {
-                    Coffre tresor = (Coffre) entities[y + zoe.getPosY()][x + zoe.getPosX()];
-                    switch (tresor.getItem()) {
-                        case "hexaforce":
-                            currentLevel.setHexaforceCollecte(true);
-                            break;
-                        case "potionvie":
-                            zoe.modVie(100);
-                            break;
-                        case "coeur":
-                            zoe.modVie(1);
-                            break;
-                        default:
-                            break;
+
+                int posX = x + zoe.getPosX();
+                int posY = y + zoe.getPosY();
+
+                try {
+                    if (entities[posY][posX] instanceof Coffre) {
+
+                        Coffre tresor = (Coffre) entities[posY][posX];
+                        if (!tresor.isOpen()) {
+                            switch (tresor.getItem()) {
+
+                                case "hexaforce":
+                                    currentLevel.setHexaforceCollecte(true);
+                                    break;
+
+                                case "potionvie":
+                                    zoe.modVie(100);
+                                    break;
+
+                                case "coeur":
+                                    zoe.modVie(1);
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+                        }
                     }
+                } catch (ArrayIndexOutOfBoundsException aioobe) {
                 }
+
             }
         }
     }

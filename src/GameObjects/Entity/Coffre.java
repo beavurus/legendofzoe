@@ -14,4 +14,8 @@ public class Coffre extends Entity {
         return this.item;
     }
 
+    public boolean isOpen() {
+        return this.getAppearance() == '_';
+    }
+
 }
