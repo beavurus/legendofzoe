@@ -7,11 +7,15 @@ public abstract class Personnage extends GameObject {
 
     private int pdv;
     private int dmg;
+    private final static int MIN_VIE = 0;
 
     public Personnage(int pdv, int dmg, char appearance, int posX, int posY) {
         super(posX, posY, appearance);
         this.pdv = pdv;
         this.dmg = dmg;
+    }
+
+    public void checkVie() {
     }
 
     public int getPDV() {
@@ -27,9 +31,17 @@ public abstract class Personnage extends GameObject {
         setPosY(this.getPosY() + y);
     }
 
+    public boolean isAlive() {
+        return this.getPDV() > MIN_VIE;
+    }
+
     public void modVie(int mod) {
 
         this.pdv += mod;
+        if  (this.pdv < MIN_VIE) {
+            this.pdv = 0;
+        }
+
     }
 
     public void attaquer(Personnage personnage) {

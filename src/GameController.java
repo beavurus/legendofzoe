@@ -36,10 +36,12 @@ public class GameController {
 
     }
 
-    public void tourZoe(char c) {
+    public boolean tourZoe(char c) {
 
+        //TODO deplacer exit(zoe) en bas pour verifier meme a la fin d'un tour.
         if (currentLevel.isHexaforceCollecte() && exit(zoe)) {
             nextLevel();
+            return false;
         } else {
             switch (c) {
                 case 'w':
@@ -77,7 +79,7 @@ public class GameController {
                 default:
                     break;
             }
-        }
+        } return true;
     }
 
     private void creuser(Zoe zoe) {
@@ -153,7 +155,7 @@ public class GameController {
     }
 
     public void render() {
-        RenderEngine.render(entities, monstres, zoe);
+        RenderEngine.render(entities, monstres, zoe, numNiveau);
     }
 
     public void nextLevel() {
@@ -176,7 +178,7 @@ public class GameController {
                 case "monstre":
                     posX = Integer.parseInt(s[2]);
                     posY = Integer.parseInt(s[3]);
-                    monstres.add(new Monstre(s[1], posX, posY));
+                    monstres.add(new Monstre(s[1], posX, posY, numNiveau));
                     break;
                 case "sortie":
                     posX = Integer.parseInt(s[1]);

@@ -6,58 +6,64 @@ public class Monstre extends Personnage {
 
     private String item;
 
-    public Monstre(String item, int x, int y) {
-        super(1,1, '@', x,y);
+    public Monstre(String item, int x, int y, int numNiveau) {
+
+        super((int) Math.max(0.6*numNiveau, 1),
+                (int) Math.max(0.4*numNiveau, 1),
+                '@', x,y);
         this.item = item;
     }
 
     public void deplacer(Zoe zoe, Entity[][] entities) {
 
-        System.out.println(getDirection(zoe));
-        switch (getDirection(zoe)) {
-            case "N":
-                if (!(entities[this.getPosY()-1][this.getPosX()] instanceof Mur)) {
-                    super.deplacer(0, -1);
-                }
-                break;
-            case "NE":
-                if (!(entities[this.getPosY()-1][this.getPosX()+1] instanceof Mur)) {
-                    super.deplacer(1, -1);
-                }
-                break;
-            case "E":
-                if (!(entities[this.getPosY()][this.getPosX()+1] instanceof Mur)) {
-                    super.deplacer(1, 0);
-                }
-                break;
-            case "SE":
-                if (!(entities[this.getPosY()+1][this.getPosX()+1] instanceof Mur)) {
-                    super.deplacer(1, 1);
-                }
-                break;
-            case "S":
-                if (!(entities[this.getPosY()+1][this.getPosX()] instanceof Mur)) {
-                    super.deplacer(0, 1);
-                }
-                break;
-            case "SW":
-                if (!(entities[this.getPosY()+1][this.getPosX()] instanceof Mur)) {
-                    super.deplacer(-1, 1);
-                }
-                break;
-            case "W":
-                if (!(entities[this.getPosY()][this.getPosX()-1] instanceof Mur)) {
-                    super.deplacer(-1, 0);
-                }
-                break;
-            case "NW":
-                if (!(entities[this.getPosY()-1][this.getPosX()-1] instanceof Mur)) {
-                    super.deplacer(-1, -1);
-                }
-                break;
-            default:
-                break;
+        if (this.isAlive()) {
+            switch (getDirection(zoe)) {
+                case "N":
+                    if (!(entities[this.getPosY() - 1][this.getPosX()] instanceof Mur)) {
+                        super.deplacer(0, -1);
+                    }
+                    break;
+                case "NE":
+                    if (!(entities[this.getPosY() - 1][this.getPosX() + 1] instanceof Mur)) {
+                        super.deplacer(1, -1);
+                    }
+                    break;
+                case "E":
+                    if (!(entities[this.getPosY()][this.getPosX() + 1] instanceof Mur)) {
+                        super.deplacer(1, 0);
+                    }
+                    break;
+                case "SE":
+                    if (!(entities[this.getPosY() + 1][this.getPosX() + 1] instanceof Mur)) {
+                        super.deplacer(1, 1);
+                    }
+                    break;
+                case "S":
+                    if (!(entities[this.getPosY() + 1][this.getPosX()] instanceof Mur)) {
+                        super.deplacer(0, 1);
+                    }
+                    break;
+                case "SW":
+                    if (!(entities[this.getPosY() + 1][this.getPosX()] instanceof Mur)) {
+                        super.deplacer(-1, 1);
+                    }
+                    break;
+                case "W":
+                    if (!(entities[this.getPosY()][this.getPosX() - 1] instanceof Mur)) {
+                        super.deplacer(-1, 0);
+                    }
+                    break;
+                case "NW":
+                    if (!(entities[this.getPosY() - 1][this.getPosX() - 1] instanceof Mur)) {
+                        super.deplacer(-1, -1);
+                    }
+                    break;
+                default:
+                    break;
 
+            }
+        } else {
+            this.setAppearance('x');
         }
 
     }

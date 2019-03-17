@@ -14,7 +14,15 @@ public abstract class RenderEngine {
      * @param monstres Tableau qui contient tout les monstres du niveau actuel
      * @param zoe Joueur.
      */
-    public static void render(Entity[][] game, LinkedList<Monstre> monstres, Zoe zoe) {
+    public static void render(Entity[][] game, LinkedList<Monstre> monstres, Zoe zoe, int numNiveau) {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        System.out.println("----------------------------------------");
+        System.out.printf(
+                "Points de Vie: %s ------------- Niveau: %d\n",zoe.getPDV(), numNiveau-1
+        );
+        System.out.println("----------------------------------------");
 
         char[][] level = new char[14][40];
 
