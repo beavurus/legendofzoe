@@ -7,6 +7,7 @@ public class Level {
     private Paire<boolean[][], String[]> niveau;
     private boolean[][] murs;
     private String[] objects;
+    private boolean hexaforceCollecte = false;
 
     public Level(int numNiveau) {
 
@@ -28,6 +29,14 @@ public class Level {
         assert Arrays.deepEquals(resulat, murs) : "Erreur de copie de tableau.";
 
         return resulat;
+    }
+
+    public void setHexaforceCollecte(boolean isCollecte) {
+        this.hexaforceCollecte = isCollecte;
+    }
+
+    public boolean isHexaforceCollecte() {
+        return hexaforceCollecte;
     }
 
     public String[] getObjects() {

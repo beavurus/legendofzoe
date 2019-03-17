@@ -1,5 +1,7 @@
 package GameObjects.Personnage;
 
+import GameObjects.Entity.*;
+
 public class Monstre extends Personnage {
 
     private String item;
@@ -9,46 +11,47 @@ public class Monstre extends Personnage {
         this.item = item;
     }
 
-    public void deplacer(Zoe zoe, boolean[][] murs) {
+    public void deplacer(Zoe zoe, Entity[][] entities) {
 
+        System.out.println(getDirection(zoe));
         switch (getDirection(zoe)) {
             case "N":
-                if (!murs[this.getPosY()-1][this.getPosX()]) {
+                if (!(entities[this.getPosY()-1][this.getPosX()] instanceof Mur)) {
                     super.deplacer(0, -1);
                 }
                 break;
             case "NE":
-                if (!murs[this.getPosY()-1][this.getPosX()+1]) {
+                if (!(entities[this.getPosY()-1][this.getPosX()+1] instanceof Mur)) {
                     super.deplacer(1, -1);
                 }
                 break;
             case "E":
-                if (!murs[this.getPosY()][this.getPosX()+1]) {
+                if (!(entities[this.getPosY()][this.getPosX()+1] instanceof Mur)) {
                     super.deplacer(1, 0);
                 }
                 break;
             case "SE":
-                if (!murs[this.getPosY()+1][this.getPosX()+1]) {
+                if (!(entities[this.getPosY()+1][this.getPosX()+1] instanceof Mur)) {
                     super.deplacer(1, 1);
                 }
                 break;
             case "S":
-                if (!murs[this.getPosY()+1][this.getPosX()]) {
+                if (!(entities[this.getPosY()+1][this.getPosX()] instanceof Mur)) {
                     super.deplacer(0, 1);
                 }
                 break;
             case "SW":
-                if (!murs[this.getPosY()+1][this.getPosX()]) {
+                if (!(entities[this.getPosY()+1][this.getPosX()] instanceof Mur)) {
                     super.deplacer(-1, 1);
                 }
                 break;
             case "W":
-                if (!murs[this.getPosY()][this.getPosX()-1]) {
+                if (!(entities[this.getPosY()][this.getPosX()-1] instanceof Mur)) {
                     super.deplacer(-1, 0);
                 }
                 break;
             case "NW":
-                if (!murs[this.getPosY()-1][this.getPosX()-1]) {
+                if (!(entities[this.getPosY()-1][this.getPosX()-1] instanceof Mur)) {
                     super.deplacer(-1, -1);
                 }
                 break;
@@ -65,7 +68,6 @@ public class Monstre extends Personnage {
      * @param zoe Utilise pour deduire la direction de Zoe
      * @return retourne un String de direction (NW, N, NE, E, SE, S, SW, W)
      */
-    // TODO Voir si un mur bloque le monstre ou pas.
     private String getDirection(Zoe zoe) {
 
         String direction = new String();
@@ -83,11 +85,6 @@ public class Monstre extends Personnage {
         }
 
         return direction;
-    }
-
-    // TODO des tests pour la methode direction.
-    private void getDirectionTests() {
-
     }
 
 }

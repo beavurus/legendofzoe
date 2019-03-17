@@ -17,12 +17,15 @@ public class GameController {
     }
 
     public void tourMonstres() {
+
         for (Monstre monstre : monstres) {
-            monstre.deplacer(zoe, currentLevel.getMurs());
+            monstre.deplacer(zoe, entities);
         }
+
     }
 
     public void tourZoe(char c) {
+
     	switch (c) {
     		case 'w' :
     		    if (!GameControllerHelper.collides(zoe.getPosX(), zoe.getPosY()-1, entities)) {
@@ -56,11 +59,6 @@ public class GameController {
     		case 'q' :
     		    System.exit(0);
     		    break;
-//            case 'f':
-//                int[][] paths = GameControllerHelper.findPath(zoe.getPosX(), zoe.getPosY(), currentLevel.getMurs());
-//                for (int[] path : paths) {
-//                    System.out.println(Arrays.toString(path));
-//                }
     		default:
     		    break;
     	}
@@ -124,8 +122,6 @@ public class GameController {
                     break;
             }
         }
-
-        Personnage.setLayout(entities);
 
     }
 
