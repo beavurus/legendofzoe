@@ -56,6 +56,11 @@ public class GameController {
     		case 'q' :
     		    System.exit(0);
     		    break;
+//            case 'f':
+//                int[][] paths = GameControllerHelper.findPath(zoe.getPosX(), zoe.getPosY(), currentLevel.getMurs());
+//                for (int[] path : paths) {
+//                    System.out.println(Arrays.toString(path));
+//                }
     		default:
     		    break;
     	}
@@ -92,7 +97,6 @@ public class GameController {
 
         entities = GameControllerHelper.readWalls(murs);
 
-        // TODO move some code to GameControllerHelper to ligthen class.
         for (int i = 0; i < objets.length; i++) {
             String[] s = objets[i].split(":");
             switch (s[0]) {

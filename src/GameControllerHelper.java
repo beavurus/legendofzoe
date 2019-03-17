@@ -2,6 +2,24 @@ import GameObjects.Entity.*;
 
 public abstract class GameControllerHelper {
 
+//    In progress: BONUS
+//    public static int[][] findPath(int posX, int posY, boolean[][] murs) {
+//
+//        int[][] paths = new int[murs.length][murs[0].length];
+//
+//        for (int y = 0; y < paths.length; y++) {
+//            for (int x = 0; x < paths[0].length; x++) {
+//
+//                if (!murs[y][x]) {
+//                    paths[y][x] = (posY - y) - (posX - x);
+//                } else {
+//                    paths[y][x] = -1;
+//                }
+//            }
+//        }
+//        return paths;
+//    }
+
     public static Entity[][] readWalls(boolean[][] murs) {
 
         Entity[][] entities = new Entity[14][40];
