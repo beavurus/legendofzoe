@@ -6,4 +6,10 @@ public class Zoe extends Personnage {
         super(5, 1, '&', x, y);
     }
 
+    @Override
+    public void modVie(int mod) {
+        if (this.getPDV()+mod < 5) {
+            super.modVie(mod);
+        }
+    }
 }

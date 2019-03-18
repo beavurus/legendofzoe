@@ -2,7 +2,6 @@ import GameObjects.Personnage.*;
 import GameObjects.Entity.*;
 import Level.*;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class GameController {
@@ -10,7 +9,7 @@ public class GameController {
     private Entity[][] entities = new Entity[14][40];
     private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
     private Zoe zoe;
-    private Level currentLevel;
+    private static Level currentLevel;
     private int numNiveau = 1;
 
     public GameController() {
@@ -131,7 +130,6 @@ public class GameController {
 
                                 case "hexaforce":
                                     currentLevel.setHexaforceCollecte(true);
-                                    System.out.println("Hexaforce collecté!");
                                     break;
 
                                 case "potionvie":
