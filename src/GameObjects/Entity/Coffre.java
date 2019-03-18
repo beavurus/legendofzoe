@@ -1,6 +1,8 @@
 package GameObjects.Entity;
 
-public class Coffre extends Entity {
+import GameObjects.Dropable;
+
+public class Coffre extends Entity implements Dropable {
 
     private String item;
 

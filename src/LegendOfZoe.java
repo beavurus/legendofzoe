@@ -19,6 +19,12 @@ public class LegendOfZoe {
         controller.render();
 
         while (gameActive) {
+            if (controller.getNumNiveau() == 7) {
+                gameActive = false;
+                RenderEngine.flushScreen();
+                Messages.afficherVictoire();
+                break;
+            }
             String input = s.nextLine();
             char[] commandes = input.toCharArray();
             if (commandes.length != 0) {

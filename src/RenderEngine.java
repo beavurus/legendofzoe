@@ -8,6 +8,11 @@ import java.util.LinkedList;
  */
 public abstract class RenderEngine {
 
+    public static void flushScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     /**
      * S'occupe d'afficher correctement le niveau a la console. On s'epare les entites
      * @param game Tableau 2D qui contient l'information sur tout les objets du niveau
@@ -15,9 +20,7 @@ public abstract class RenderEngine {
      * @param zoe Joueur.
      */
     public static void render(Entity[][] game, LinkedList<Monstre> monstres, Zoe zoe, int numNiveau) {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-
+        flushScreen();
         System.out.println("----------------------------------------");
         System.out.printf(
                 "Points de Vie: %s ------------- Niveau: %d\n",zoe.getPDV(), numNiveau-1

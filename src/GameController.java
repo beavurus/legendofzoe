@@ -7,7 +7,8 @@ import java.util.LinkedList;
 public class GameController {
 
     private Entity[][] entities = new Entity[14][40];
-    private LinkedList<Monstre> monstres = new LinkedList<Monstre>();
+    private LinkedList<Monstre> monstres = new LinkedList<>();
+    private LinkedList<Entity> objets = new LinkedList<>();
     private Zoe zoe;
     private static Level currentLevel;
     private int numNiveau = 1;
@@ -16,21 +17,20 @@ public class GameController {
 
     }
 
+    public int getNumNiveau() {
+        return numNiveau;
+    }
+
     public void tourMonstres() {
 
         for (Monstre monstre : monstres) {
 
-            int posX = monstre.getPosX();
-            int posY = monstre.getPosY();
-            int zoePosX = zoe.getPosX();
-            int zoePosY = zoe.getPosY();
-
-            if ((zoePosX-1 <= posX && posX <= zoePosX+1) && (zoePosY-1 <= posY && posY <= zoePosY+1) && monstre.isAlive()) {
+            if (GameControllerHelper.isClose(monstre, zoe) && monstre.isAlive()) {
                 monstre.attaquer(zoe);
             } else if (monstre.isAlive()) {
                 monstre.deplacer(zoe, entities);
             } else {
-                monstre.setAppearance('x');
+                monstre.setAppearance('x'); //TODO: faire le changement d'apparence dans la classe Monstre
             }
 
         }
@@ -64,17 +64,9 @@ public class GameController {
                     creuser(zoe);
                     break;
                 case 'x':
-                    for (int y = -1; y <= 1; y++) {
-                        for (int x = -1; x <= 1; x++) {
-                            int posX = x + zoe.getPosX();
-                            int posY = y + zoe.getPosY();
-                            if ((posX >= 0 && posX < entities[0].length && posY >= 0 && posY < entities.length)) {
-                                for (Monstre monstre : monstres) {
-                                    if (posX == monstre.getPosX() && posY == monstre.getPosY()) {
-                                        zoe.attaquer(monstre);
-                                    }
-                                }
-                            }
+                    for (Monstre monstre : monstres) {
+                        if (GameControllerHelper.isClose(zoe, monstre)) {
+                            zoe.attaquer(monstre);
                         }
                     }
                     break;
@@ -115,51 +107,19 @@ public class GameController {
 
     private void open(Zoe zoe) {
 
-        for (int y = -1; y <= 1; y++) {
-            for (int x = -1; x <= 1; x++) {
-
-                int posX = x + zoe.getPosX();
-                int posY = y + zoe.getPosY();
-
-                try {
-                    if (entities[posY][posX] instanceof Coffre) {
-
-                        Coffre tresor = (Coffre) entities[posY][posX];
-                        if (!tresor.isOpen()) {
-                            switch (tresor.getItem()) {
-
-                                case "hexaforce":
-                                    currentLevel.setHexaforceCollecte(true);
-                                    break;
-
-                                case "potionvie":
-                                    zoe.modVie(100);
-                                    break;
-
-                                case "coeur":
-                                    zoe.modVie(1);
-                                    break;
-
-                                default:
-                                    break;
-
-                            }
-                        }
-                    }
-                } catch (ArrayIndexOutOfBoundsException aioobe) {
-                }
-
+        for (Entity objet : objets) {
+            if (objet instanceof Coffre && GameControllerHelper.isClose(zoe, objet) && !((Coffre) objet).isOpen()) {
+                GameControllerHelper.dropItem(((Coffre) objet).getItem(), zoe, currentLevel);
             }
         }
+
     }
 
     private boolean exit(Zoe zoe) {
 
-        for (int y = -1; y <= 1; y++) {
-            for (int x = -1; x <= 1; x++) {
-                if (entities[y + zoe.getPosY()][x + zoe.getPosX()] instanceof Sortie) {
-                    return true;
-                }
+        for (Entity objet : objets) {
+            if (objet instanceof Sortie && GameControllerHelper.isClose(zoe, objet)) {
+                return true;
             }
         }
 
@@ -179,7 +139,8 @@ public class GameController {
         String[] objets = currentLevel.getObjects();
 
         entities = GameControllerHelper.readWalls(murs);
-        monstres.clear();
+        this.monstres.clear();
+        this.objets.clear();
 
         for (int i = 0; i < objets.length; i++) {
             String[] s = objets[i].split(":");
@@ -188,6 +149,7 @@ public class GameController {
                     int posX = Integer.parseInt(s[2]);
                     int posY = Integer.parseInt(s[3]);
                     entities[posY][posX] = new Coffre(posX, posY, '$', s[1]);
+                    this.objets.add(entities[posY][posX]);
                     break;
                 case "monstre":
                     posX = Integer.parseInt(s[2]);
@@ -198,6 +160,7 @@ public class GameController {
                     posX = Integer.parseInt(s[1]);
                     posY = Integer.parseInt(s[2]);
                     entities[posY][posX] = new Sortie(posX, posY, 'E');
+                    this.objets.add(entities[posY][posX]);
                     break;
                 case "zoe":
                     posX = Integer.parseInt(s[1]);

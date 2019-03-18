@@ -1,4 +1,7 @@
 import GameObjects.Entity.*;
+import GameObjects.Personnage.Personnage;
+import GameObjects.Personnage.Zoe;
+import Level.Level;
 
 public abstract class GameControllerHelper {
 
@@ -63,6 +66,47 @@ public abstract class GameControllerHelper {
 
         return true;
 
+    }
+
+    public static void dropItem(String item, Zoe zoe, Level currentLevel) {
+
+        switch (item){
+            case "hexaforce":
+                currentLevel.setHexaforceCollecte(true);
+                break;
+            case "potionvie":
+                zoe.modVie(100);
+                break;
+            case "coeur":
+                zoe.modVie(1);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public static boolean isClose(Personnage main, Personnage autre) {
+
+        return isClose(main, autre.getPosX(), autre.getPosY());
+
+    }
+
+    public static boolean isClose(Personnage main, Entity objet) {
+
+        return isClose(main, objet.getPosX(), objet.getPosY());
+
+    }
+
+    private static boolean isClose(Personnage main, int posX2, int posY2) {
+        int posX = main.getPosX();
+        int posY = main.getPosY();
+
+        if ((posX-1 <= posX2 && posX2 <= posX+1) && (posY-1 <= posY2 && posY2 <= posY+1)) {
+            return true;
+        }
+
+        return false;
     }
 
 }

@@ -44,6 +44,10 @@ public abstract class Personnage extends GameObject {
 
     }
 
+    public void modVie(int max, boolean full) {
+        this.pdv = max;
+    }
+
     public void attaquer(Personnage personnage) {
 
 	        personnage.modVie(- this.dmg);

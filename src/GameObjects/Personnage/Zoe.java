@@ -10,6 +10,8 @@ public class Zoe extends Personnage {
     public void modVie(int mod) {
         if (this.getPDV()+mod < 5) {
             super.modVie(mod);
+        } else {
+            super.modVie(5, true);
         }
     }
 }

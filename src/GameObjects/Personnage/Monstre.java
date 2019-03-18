@@ -1,8 +1,9 @@
 package GameObjects.Personnage;
 
+import GameObjects.Dropable;
 import GameObjects.Entity.*;
 
-public class Monstre extends Personnage {
+public class Monstre extends Personnage implements Dropable {
 
     private String item;
 
@@ -12,6 +13,18 @@ public class Monstre extends Personnage {
                 (int) Math.max(0.4*numNiveau, 1),
                 '@', x,y);
         this.item = item;
+    }
+
+    public static void dropItem(String item) {
+
+    }
+
+    @Override
+    public void modVie(int mod) {
+        super.modVie(mod);
+        if (!this.isAlive()) {
+            //TODO drop item
+        }
     }
 
     public void deplacer(Zoe zoe, Entity[][] entities) {
