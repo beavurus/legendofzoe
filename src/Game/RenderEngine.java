@@ -2,6 +2,7 @@ package Game;
 
 import Game.GameObjects.Entity.*;
 import Game.GameObjects.Personnage.*;
+import Game.Messages.GameMessages;
 
 import java.util.LinkedList;
 
@@ -58,6 +59,8 @@ public abstract class RenderEngine {
             System.out.println(s);
             s = "";
         }
+
+        System.out.println(GameMessages.getActiveInfo());
 
     }
 

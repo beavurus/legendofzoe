@@ -3,9 +3,14 @@ package Game;
 import Game.GameObjects.Personnage.*;
 import Game.GameObjects.Entity.*;
 import Game.Level.*;
+import Game.Messages.GameMessages;
 
 import java.util.LinkedList;
 
+/**
+ * Class qui controle le fonctionnement du jeu, rassemble l'information, et la rend comprehensible,
+ * et utilisable.
+ */
 public class GameController {
 
     private Entity[][] entities = new Entity[14][40];
@@ -16,17 +21,28 @@ public class GameController {
     private int numNiveau = 1;
 
     public GameController() {
-
     }
 
+    /**
+     * Verifie si Zoe est morte...
+     * @return Vrai si zoe n'as plus de points de vie, faux sinon
+     */
     public boolean isZoeDead() {
         return !zoe.isAlive();
     }
 
+    /**
+     * Retourne le numero du Niveau prochain.
+     * @return int numNiveau
+     */
     public int getNumNiveau() {
         return numNiveau;
     }
 
+    /**
+     * Passe a travers la liste des monstres:
+     * - Si zoe est proche, on l'attaque, sinon on se deplace vers elle.
+     */
     public void tourMonstres() {
 
         for (Monstre monstre : monstres) {
@@ -41,6 +57,16 @@ public class GameController {
 
     }
 
+    /**
+     * Methode qui controle le jeu.
+     * Pour wasd, on verifie avant si zoe peut effectivement se deplacer a la case voulu.
+     * Pour c, on enleve les murs autour de zoe.
+     * Pour o, on ouvre les coffres autour de zoe.
+     * Pour x, on attaque les monstres autour de zoe.
+     * Pour q, on arrete le programme.
+     * @param c entree du joueur (Si c'est un string, on le decompose avant de faire apel a cette methode).
+     * @return true si zoe joue, false sinon.
+     */
     public boolean tourZoe(char c) {
 
             switch (c) {
@@ -73,6 +99,7 @@ public class GameController {
                             zoe.attaquer(monstre);
                             if (!monstre.isAlive()) {
                                 GameControllerHelper.dropItem(monstre.getItem(), zoe, currentLevel);
+                                GameMessages.itemPickup(monstre.getItem());
                             }
                         }
                     }
@@ -86,7 +113,7 @@ public class GameController {
                 default:
                     break;
             }
-
+        // Si Zoe est proche de la sortie, et qu'elle possede le morceau d'hexaforce, on passe au prochain niveau.
         if (currentLevel.isHexaforceCollecte() && exit(zoe)) {
             nextLevel();
             return false;
@@ -95,6 +122,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Enleve les instances de murs dans entities, autour des coordonnes de zoe.
+     * @param zoe Pour trouver les coordonnes.
+     */
     private void creuser(Zoe zoe) {
 
         int posX = zoe.getPosX();
@@ -112,16 +143,27 @@ public class GameController {
 
     }
 
+    /**
+     * On verifie s'il y a des coffres autour de zoe, si oui, est-ce qu'ils sont ouverts? On drop l'item, puis
+     * on change l'apparence du coffre.
+     * @param zoe Pour les coordonnes de zoe.
+     */
     private void open(Zoe zoe) {
 
         for (Entity objet : objets) {
             if (objet instanceof Coffre && GameControllerHelper.isClose(zoe, objet) && !((Coffre) objet).isOpen()) {
                 GameControllerHelper.dropItem(((Coffre) objet).getItem(), zoe, currentLevel);
+                GameMessages.itemPickup(((Coffre) objet).getItem());
             }
         }
 
     }
 
+    /**
+     * Methode qui verifie si zoe est proche d'une sortie.
+     * @param zoe instance de zoe.
+     * @return true si une sortie est proche, false sinon.
+     */
     private boolean exit(Zoe zoe) {
 
         for (Entity objet : objets) {
@@ -134,10 +176,17 @@ public class GameController {
 
     }
 
+    /**
+     * Fait apel a RenderEngine, pour afficher le jeu textuellement.
+     */
     public void render() {
         RenderEngine.render(entities, monstres, zoe, numNiveau);
     }
 
+    /**
+     * Cree un nouveau niveau, et lis les donnees en creant les objets necessaires, et en remplissant leurs
+     * caracteristiques.
+     */
     public void nextLevel() {
 
         currentLevel = new Level(numNiveau);
