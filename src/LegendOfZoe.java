@@ -1,5 +1,5 @@
 import Game.GameController;
-import Game.Messages;
+import Game.Messages.Messages;
 import Game.RenderEngine;
 
 import java.util.Scanner;
