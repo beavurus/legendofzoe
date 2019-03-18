@@ -14,7 +14,7 @@ public abstract class GameControllerHelper {
         for (int i = 0; i < murs.length; i++) {
             for (int j = 0; j < murs[0].length; j++) {
                 if (murs[i][j]) {
-                    entities[i][j] = new Mur(j,i,'#');
+                    entities[i][j] = new Mur(j,i);
                 } else {
                     entities[i][j] = null;
                 }

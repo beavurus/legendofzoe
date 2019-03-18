@@ -2,19 +2,13 @@ package Game.GameObjects.Entity;
 
 import Game.GameObjects.GameObject;
 
+/**
+ * Classe utilisee pour l'heritage, et le groupement d'entitees.
+ */
 public abstract class Entity extends GameObject {
-
-    private static Entity[][] layout;
 
     public Entity(int posX, int posY, char appearance) {
         super(posX, posY, appearance);
     }
 
-    public static void setLayout(Entity[][] layout) {
-        Entity.layout = layout;
-    }
-
-    public static Entity[][] getLayout() {
-        return layout;
-    }
 }

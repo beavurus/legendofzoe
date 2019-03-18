@@ -2,6 +2,9 @@ package Game.Level;
 
 import java.util.Arrays;
 
+/**
+ * Classe d'un niveau.
+ */
 public class Level {
 
     private Paire<boolean[][], String[]> niveau;

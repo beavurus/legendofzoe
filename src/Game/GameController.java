@@ -155,7 +155,7 @@ public class GameController {
                 case "tresor":
                     int posX = Integer.parseInt(s[2]);
                     int posY = Integer.parseInt(s[3]);
-                    entities[posY][posX] = new Coffre(posX, posY, '$', s[1]);
+                    entities[posY][posX] = new Coffre(posX, posY, s[1]);
                     this.objets.add(entities[posY][posX]);
                     break;
                 case "monstre":
@@ -166,7 +166,7 @@ public class GameController {
                 case "sortie":
                     posX = Integer.parseInt(s[1]);
                     posY = Integer.parseInt(s[2]);
-                    entities[posY][posX] = new Sortie(posX, posY, 'E');
+                    entities[posY][posX] = new Sortie(posX, posY);
                     this.objets.add(entities[posY][posX]);
                     break;
                 case "zoe":
