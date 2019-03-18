@@ -1,9 +1,8 @@
 package GameObjects.Personnage;
 
-import GameObjects.Dropable;
 import GameObjects.Entity.*;
 
-public class Monstre extends Personnage implements Dropable {
+public class Monstre extends Personnage {
 
     private String item;
 
@@ -15,8 +14,9 @@ public class Monstre extends Personnage implements Dropable {
         this.item = item;
     }
 
-    public static void dropItem(String item) {
-
+    public String getItem() {
+        setAppearance('x');
+        return this.item;
     }
 
     @Override

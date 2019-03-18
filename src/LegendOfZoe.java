@@ -24,6 +24,10 @@ public class LegendOfZoe {
                 RenderEngine.flushScreen();
                 Messages.afficherVictoire();
                 break;
+            } else if (controller.isZoeDead()){
+                gameActive = false;
+                RenderEngine.flushScreen();
+                Messages.afficherDefaite();
             }
             String input = s.nextLine();
             char[] commandes = input.toCharArray();

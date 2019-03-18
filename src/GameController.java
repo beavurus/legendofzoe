@@ -17,6 +17,10 @@ public class GameController {
 
     }
 
+    public boolean isZoeDead() {
+        return !zoe.isAlive();
+    }
+
     public int getNumNiveau() {
         return numNiveau;
     }
@@ -29,8 +33,6 @@ public class GameController {
                 monstre.attaquer(zoe);
             } else if (monstre.isAlive()) {
                 monstre.deplacer(zoe, entities);
-            } else {
-                monstre.setAppearance('x'); //TODO: faire le changement d'apparence dans la classe Monstre
             }
 
         }
@@ -65,8 +67,11 @@ public class GameController {
                     break;
                 case 'x':
                     for (Monstre monstre : monstres) {
-                        if (GameControllerHelper.isClose(zoe, monstre)) {
+                        if (GameControllerHelper.isClose(zoe, monstre) && monstre.isAlive()) {
                             zoe.attaquer(monstre);
+                            if (!monstre.isAlive()) {
+                                GameControllerHelper.dropItem(monstre.getItem(), zoe, currentLevel);
+                            }
                         }
                     }
                     break;
