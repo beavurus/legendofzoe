@@ -1,6 +1,8 @@
-import GameObjects.Personnage.*;
-import GameObjects.Entity.*;
-import Level.*;
+package Game;
+
+import Game.GameObjects.Personnage.*;
+import Game.GameObjects.Entity.*;
+import Game.Level.*;
 
 import java.util.LinkedList;
 

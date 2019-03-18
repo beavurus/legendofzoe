@@ -1,4 +1,4 @@
-package Level;
+package Game.Level;
 
 /**
  * Génération de cavernes basée sur

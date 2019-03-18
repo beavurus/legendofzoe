@@ -1,4 +1,4 @@
-package GameObjects.Entity;
+package Game.GameObjects.Entity;
 
 public class Coffre extends Entity {
 

@@ -1,7 +1,9 @@
-import GameObjects.Entity.*;
-import GameObjects.Personnage.Personnage;
-import GameObjects.Personnage.Zoe;
-import Level.Level;
+package Game;
+
+import Game.GameObjects.Entity.*;
+import Game.GameObjects.Personnage.Personnage;
+import Game.GameObjects.Personnage.Zoe;
+import Game.Level.Level;
 
 public abstract class GameControllerHelper {
 

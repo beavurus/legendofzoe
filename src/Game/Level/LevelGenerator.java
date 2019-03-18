@@ -1,4 +1,4 @@
-package Level;
+package Game.Level;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +13,7 @@ public class LevelGenerator {
     public static final int LARGEUR = 40, HAUTEUR = 14;
 
     /**
-     * Génère un niveau du jeu sous forme de Level.Paire contenant deux éléments : 1.
+     * Génère un niveau du jeu sous forme de Game.Level.Paire contenant deux éléments : 1.
      * un tableau 2D de booléens représentant les murs 2. Un tableau de Strings
      * décrivant les objets sur le jeu.
      *

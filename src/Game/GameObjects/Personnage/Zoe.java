@@ -1,4 +1,4 @@
-package GameObjects.Personnage;
+package Game.GameObjects.Personnage;
 
 public class Zoe extends Personnage {
 

@@ -1,4 +1,4 @@
-package Level;
+package Game.Level;
 
 /**
  * Classe générique pour représenter une paire d'éléments

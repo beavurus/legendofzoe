@@ -1,4 +1,4 @@
-package Level;
+package Game.Level;
 
 import java.util.Arrays;
 

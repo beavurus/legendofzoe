@@ -1,6 +1,6 @@
-package GameObjects.Personnage;
+package Game.GameObjects.Personnage;
 
-import GameObjects.Entity.*;
+import Game.GameObjects.Entity.*;
 
 public class Monstre extends Personnage {
 
@@ -22,9 +22,6 @@ public class Monstre extends Personnage {
     @Override
     public void modVie(int mod) {
         super.modVie(mod);
-        if (!this.isAlive()) {
-            //TODO drop item
-        }
     }
 
     public void deplacer(Zoe zoe, Entity[][] entities) {

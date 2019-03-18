@@ -1,7 +1,6 @@
-package GameObjects.Personnage;
+package Game.GameObjects.Personnage;
 
-import GameObjects.Entity.Entity;
-import GameObjects.GameObject;
+import Game.GameObjects.GameObject;
 
 public abstract class Personnage extends GameObject {
 
