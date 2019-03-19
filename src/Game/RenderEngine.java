@@ -2,7 +2,6 @@ package Game;
 
 import Game.GameObjects.Entity.*;
 import Game.GameObjects.Personnage.*;
-import Game.Messages.GameMessages;
 
 import java.util.LinkedList;
 
@@ -23,12 +22,8 @@ public abstract class RenderEngine {
      * @param zoe Joueur.
      */
     public static void render(Entity[][] game, LinkedList<Monstre> monstres, Zoe zoe, int numNiveau) {
+
         flushScreen();
-        System.out.println("----------------------------------------");
-        System.out.printf(
-                "Points de Vie: %s ------------- Niveau: %d\n",zoe.getPDV(), numNiveau-1
-        );
-        System.out.println("----------------------------------------");
 
         char[][] level = new char[14][40];
 
@@ -50,7 +45,6 @@ public abstract class RenderEngine {
             level[zoe.getPosY()][zoe.getPosX()] = zoe.getAppearance();
         }
 
-
         String s = new String();
         for (char[] c : level) {
             for (char c1 : c) {
@@ -59,8 +53,6 @@ public abstract class RenderEngine {
             System.out.println(s);
             s = "";
         }
-
-        System.out.println(GameMessages.getActiveInfo());
 
     }
 

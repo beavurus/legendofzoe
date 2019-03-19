@@ -3,7 +3,6 @@ package Game;
 import Game.GameObjects.Personnage.*;
 import Game.GameObjects.Entity.*;
 import Game.Level.*;
-import Game.Messages.GameMessages;
 
 import java.util.LinkedList;
 
@@ -111,7 +110,6 @@ public class GameController {
                             zoe.attaquer(monstre);
                             if (!monstre.isAlive()) {
                                 GameControllerHelper.dropItem(monstre.getItem(), zoe, currentLevel);
-                                GameMessages.itemPickup(monstre.getItem());
                             }
                         }
                     }
@@ -166,7 +164,6 @@ public class GameController {
         for (Entity objet : objets) {
             if (objet instanceof Coffre && GameControllerHelper.isClose(zoe, objet) && !((Coffre) objet).isOpen()) {
                 GameControllerHelper.dropItem(((Coffre) objet).getItem(), zoe, currentLevel);
-                GameMessages.itemPickup(((Coffre) objet).getItem());
             }
         }
 
