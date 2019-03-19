@@ -8,11 +8,17 @@ import Game.Messages.GameMessages;
 import java.util.LinkedList;
 
 /**
- * Class qui controle le fonctionnement du jeu, rassemble l'information, et la rend comprehensible,
+ * Classe qui controle le fonctionnement du jeu, rassemble l'information, et la rend comprehensible,
  * et utilisable.
  */
 public class GameController {
 
+    /* On a ici les attributs pricnipaux du jeu comme :
+	 * - un tableau pour representer la grille de jeu
+	 * - une liste chainee qui contient les monstres
+	 * - une liste chainee qui contient les objets
+	 */
+    
     private Entity[][] entities = new Entity[14][40];
     private LinkedList<Monstre> monstres = new LinkedList<>();
     private LinkedList<Entity> objets = new LinkedList<>();
@@ -41,7 +47,8 @@ public class GameController {
 
     /**
      * Passe a travers la liste des monstres:
-     * - Si zoe est proche, on l'attaque, sinon on se deplace vers elle.
+     * - Si zoe est proche, on l'attaque
+     * - Sinon on se deplace vers elle.
      */
     public void tourMonstres() {
 
@@ -59,12 +66,17 @@ public class GameController {
 
     /**
      * Methode qui controle le jeu.
+     * 
      * Pour wasd, on verifie avant si zoe peut effectivement se deplacer a la case voulu.
+     * 
      * Pour c, on enleve les murs autour de zoe.
      * Pour o, on ouvre les coffres autour de zoe.
      * Pour x, on attaque les monstres autour de zoe.
      * Pour q, on arrete le programme.
-     * @param c entree du joueur (Si c'est un string, on le decompose avant de faire apel a cette methode).
+     * 
+     * @param c entree du joueur
+     *
+     * (Si c'est un string, on le decompose avant de faire appel a cette methode).
      * @return true si zoe joue, false sinon.
      */
     public boolean tourZoe(char c) {
@@ -144,8 +156,9 @@ public class GameController {
     }
 
     /**
-     * On verifie s'il y a des coffres autour de zoe, si oui, est-ce qu'ils sont ouverts? On drop l'item, puis
-     * on change l'apparence du coffre.
+     * On verifie s'il y a des coffres autour de zoe
+     * Si c'est le cas, on verifie s'ils sont ouverts
+     * Si oui, on drop l'item, puis on change l'apparence du coffre.
      * @param zoe Pour les coordonnes de zoe.
      */
     private void open(Zoe zoe) {
@@ -198,6 +211,13 @@ public class GameController {
         this.monstres.clear();
         this.objets.clear();
 
+        /**
+        * On lit le string contenant tous les objets
+        * En fonction du nom de l'objet (s[0]),
+        * on le place dans le tableau des entitees
+        */
+    
+        
         for (int i = 0; i < objets.length; i++) {
             String[] s = objets[i].split(":");
             switch (s[0]) {
