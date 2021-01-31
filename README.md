@@ -1,2 +1,3 @@
 # Legend Of Zoe
-This is just a university project / assignement that I had to do. Feel free to try it out :)
+## Old University Project
+This is an old university project. It's here for archival purposes.
